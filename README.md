@@ -3,20 +3,7 @@ key-value util component for redux and redux-react usage
 
 ## API Reference
 
-### withKV(config: Object)
-
-config properties:
-- `keys`: Array of String: used keys in component
-
-component props:
-- `kv` (Object)
-  - `keys`: Array: used keys in component
-  - `values`: Object: values of keys
-  - `[keyName]`\(Object)
-    - `value`: Any: value of key
-    - `setValue`: function(value: Any): dispatch a set value method to redux store
-
-### reducer
+### install reducer
 
 should placed in redux state.kv
 
