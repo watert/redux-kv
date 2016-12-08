@@ -9,7 +9,7 @@ config properties:
 - `keys`: Array of String: used keys in component
 
 component props:
-- `kv`: Object
+- `kv` (Object)
   - `keys`: Array: used keys in component
   - `values`: Object: values of keys
   - `[keyName]`\(Object)
