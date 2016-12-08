@@ -3,7 +3,7 @@ export const defaultOptions = {
   initialValues: {},
   prefix: 'REDUX_KV',
 }
-export function createSelector(options = {}) {
+export function createKVSelector(options = {}) {
   options = { ...defaultOptions, ...options }
   const { getState } = options
   function selector(storeState, key) {

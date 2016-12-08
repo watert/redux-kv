@@ -3,14 +3,14 @@
 import React, { Component } from 'react'
 import withKV from './withKV'
 
-import { defaultOptions, createSelector, createActionCreators,
+import { defaultOptions, createKVSelector, createActionCreators,
   createReducer} from './creators'
 
 export function createKV(options = {}) {
   options = { ...defaultOptions, ...options }
   const { getState, initialValues, prefix } = options
   return {
-    selector: createSelector({ getState }),
+    selector: createKVSelector({ getState }),
     reducer: createReducer({ prefix, initialValues }),
     withKV: (moreOptions = {}) => {
       return withKV({ ...options, ...moreOptions })

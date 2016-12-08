@@ -1,5 +1,5 @@
 import { selector } from '../redux-kv'
-import { createSelector } from '../creators'
+import { createKVSelector } from '../creators'
 import { assert } from 'chai'
 describe('selectors', () => {
   const data = { k:'v', k2:'v2' }
@@ -13,7 +13,7 @@ describe('selectors', () => {
   })
   it('custom getState', () => {
     const getState = (state) => state.options
-    const selector = createSelector({ getState })
+    const selector = createKVSelector({ getState })
     const storeState = { options: data }
     expect(selector(storeState, 'k')).toBe('v')
   })

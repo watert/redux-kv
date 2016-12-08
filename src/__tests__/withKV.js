@@ -22,7 +22,10 @@ describe('withKV with react', () => {
   const Root = ({ children }) => {
     return <Provider store={store}>{children}</Provider>
   }
-  const KVContainer = () => null
+  const KVContainer = () => {
+    console.log('render KVContainer')
+    return null
+  }
   const ConnectKVContainer = withKV({ keys: ['key2'] })(KVContainer)
   it('basic connect', () => {
     const root = mount(<Provider store={store}><ConnectKVContainer /></Provider>)
@@ -45,5 +48,8 @@ describe('withKV with react', () => {
     assert.deepEqual(optionsView.props().kv.values, {optKey: 'optVal'})
     store.dispatch(setOption('optKey2', 'v2'))
     assert.equal(selectOptions(store.getState(), 'optKey2'), 'v2')
+    store.dispatch(setOption('optKey2', 'v3'))
+    store.dispatch(setOption('optKey2', 'v4'))
+    store.dispatch(setOption('optKey2', 'v5'))
   })
 })

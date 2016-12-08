@@ -38,6 +38,8 @@
   },
   "dependencies": {
     "react-redux": "^4.4.6",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "reselect": "^2.5.4",
+    "shallow-compare": "^1.2.0"
   }
 }

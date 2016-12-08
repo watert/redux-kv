@@ -1,7 +1,8 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { defaultOptions, createSelector, createActionCreators } from './creators'
-
+import { defaultOptions, createKVSelector, createActionCreators } from './creators'
+// import shallowCompare from 'shallow-compare'
+// import { createSelector } from 'reselect'
 function pick(object, keys) {
   let result = {}
   keys.forEach((key) => {
@@ -19,16 +20,19 @@ export default function withKV(options = {}) {
   if(!keys || !keys.length) {
     throw new TypeError('[redux-kv] options.keys is not an array in withKV method')
   }
-  const selector = createSelector(options)
+  const selectKV = createKVSelector(options)
+  // const cacheSelectValues = createSelector(
+  //   (state) => selectKV(state),
+  //   (kvState) => pick(kvState, keys)
+  // )
   const actionCreators = createActionCreators(options)
   const mapStateToProps = (state) => {
-    const kvData = pick(selector(state), keys)
-    return { kvData, keys }
+    return pick(selectKV(state), keys)
   }
   const mapDispatchToProps = (dispatch) => {
     return { dispatch }
   }
-  function mergeProps({ kvData, keys }, { dispatch }, ownProps) {
+  function mergeProps(kvData, { dispatch }, ownProps) {
     const kv = { values: kvData }
     keys.forEach((key) => {
       kv[key] = {
