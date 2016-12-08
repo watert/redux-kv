@@ -1,12 +1,13 @@
 {
   "name": "redux-kv",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "key-value util component for redux",
   "main": "index.js",
   "scripts": {
     "build": "babel src/redux-kv.js --out-file dist/redux-kv.js",
     "prepublish": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "npm:publish": "npm publish ./"
   },
   "repository": {
     "type": "git",

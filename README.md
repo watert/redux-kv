@@ -1,5 +1,65 @@
 # redux-kv
-kv util component for redux and redux-react usage
+key-value util component for redux and redux-react usage
+
+## API Reference
+
+### withKV(config: Object)
+
+config properties:
+- `keys`: Array of String: used keys in component
+
+component props:
+- `kv`: Object
+  - `keys`: Array: used keys in component
+  - `values`: Object: values of keys
+  - `[keyName]`\(Object)
+    - `value`: Any: value of key
+    - `setValue`: function(value: Any): dispatch a set value method to redux store
+
+### reducer
+
+should placed in redux state.kv
+
+example:
+```javascript
+import { reducer as kvReducer } from 'redux-kv'
+const reducers = {
+  // ... your other reducers here...
+  kv: kvReducer
+}
+const store = createStore(combineReducers(reducers))
+```
+
+### setValue(keyName: String, value: Any)
+
+creates an action to set a single value of a key
+
+example: `dispatch(setValue('key', 'value'))`
+
+### setValues(Object)
+
+creates an action to set multiple values
+
+example: `dispatch(setValues({ key1: 'v1', key2: 'v2' }))`
+
+### resetValues
+
+resets all values to `undefined`
+
+### selector(state: ReduxState, [keyName: String])
+
+select needed value or all values from redux state.
+usually used in `mapStateToProps` method
+
+example:
+```javascript
+function mapStateToProps(state) { // used in your own connect method
+  const { key1 } = kvSelector(state);
+  const key2 = kvSelector(state, 'key2')
+  return { key1, key2 };
+}
+```
+
 
 ## quick start:
 ### Step #1: setup reducer to redux store
