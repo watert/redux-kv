@@ -1,0 +1,39 @@
+{
+  "name": "redux-kv",
+  "version": "0.1.0",
+  "description": "key-value util component for redux",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/redux-kv.js --out-file dist/redux-kv.js",
+    "prepublish": "npm run build",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watert/redux-kv.git"
+  },
+  "keywords": [
+    "redux",
+    "kv"
+  ],
+  "author": "watert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/watert/redux-kv/issues"
+  },
+  "homepage": "https://github.com/watert/redux-kv#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.6.0",
+    "jest": "^17.0.3",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0"
+  }
+}
