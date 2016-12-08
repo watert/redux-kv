@@ -10,10 +10,11 @@ describe('withKV with react', () => {
   const {
     setValue: setOption,
     reducer: optionsReducer,
+    selector: selectOptions,
     withKV: withOptions
   } = createKV({
     getState: (state) => state.options,
-    prefix: 'OPTIONS_',
+    prefix: 'OPTIONS',
     initialValues: { optKey: 'optVal', test:'test'}
   })
   const reducers = combineReducers({ kv: reducer, options: optionsReducer })
@@ -39,6 +40,10 @@ describe('withKV with react', () => {
     const ConnectOptionsContainer = withOptions({ keys: ['optKey'] })(KVContainer)
     const root = mount(<Root><ConnectOptionsContainer /></Root>)
     const optionsView = root.find('KVContainer')
+    assert.equal(setOption('optKey2', 'v2').type, 'OPTIONS_SET_VALUES',
+      'prefix correct')
     assert.deepEqual(optionsView.props().kv.values, {optKey: 'optVal'})
+    store.dispatch(setOption('optKey2', 'v2'))
+    assert.equal(selectOptions(store.getState(), 'optKey2'), 'v2')
   })
 })

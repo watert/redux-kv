@@ -36,7 +36,7 @@ creates an action to set a single value of a key
 
 example: `dispatch(setValue('key', 'value'))`
 
-### setValues(Object)
+### setValues(values: Object)
 
 creates an action to set multiple values
 
@@ -60,6 +60,35 @@ function mapStateToProps(state) { // used in your own connect method
 }
 ```
 
+### createKV(config: Object)
+
+creates custom reducer, selector, actionCreators, and withKV with options
+
+configs:
+* getState: (state) => state.kv // position of reducer
+* initialValues: {}
+* prefix: 'REDUX_KV'
+
+custom example:
+```javascript
+const { reducer, selector, setValue, resetValues } = createKV({
+  prefix:'CUSTOM_KEY', initialValues: {k: 'defaultValue'},
+  getState: (state) => state.customOptions,
+})
+```
+
+### withKV(config: Object)
+
+#### config properties:
+- `keys`: [...String]: used keys in component
+
+#### component props:
+- `kv` { keys, values, ...keyObjects }
+  - `keys` [...String] : used keys in component
+  - `values` (Object) values of keys
+  - `[keyName]` (Object)
+    - `value`: Any: value of key
+    - `setValue`: function(value: Any): dispatch a set value method to redux store
 
 ## quick start:
 ### Step #1: setup reducer to redux store
@@ -116,4 +145,4 @@ function mapDispatchToProps(dispatch) {
 
 ## TODOs:
 
-- [ ] createKV method document
+- [x] createKV method document
