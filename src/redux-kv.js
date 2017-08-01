@@ -1,25 +1,25 @@
 /*
 */
-import React, { Component } from 'react'
-import withKV from './withKV'
+// import React, { Component } from 'react';
+import withKV from './withKV';
 
 import { defaultOptions, createKVSelector, createActionCreators,
-  createReducer} from './creators'
+  createReducer,
+} from './creators';
 
-export function createKV(options = {}) {
-  options = { ...defaultOptions, ...options }
-  const { getState, initialValues, prefix } = options
+export function createKV(opts = {}) {
+  const options = { ...defaultOptions, ...opts };
+  const { getState, initialValues, prefix } = options;
+  const { setValue, setValues, resetValues } = createActionCreators({ prefix });
   return {
     selector: createKVSelector({ getState }),
     reducer: createReducer({ prefix, initialValues }),
-    withKV: (moreOptions = {}) => {
-      return withKV({ ...options, ...moreOptions })
-    },
-    ...createActionCreators({ prefix }),
-  }
+    withKV: (moreOptions = {}) => withKV({ ...options, ...moreOptions }),
+    setValue, setValues, resetValues,
+  };
 }
-export { withKV }
+export { withKV };
 export const {
   selector, reducer,
-  setValue, setValues, resetValues
-} = createKV()
+  setValue, setValues, resetValues,
+} = createKV();

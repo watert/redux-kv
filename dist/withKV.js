@@ -14,6 +14,8 @@ var _reactRedux = require('react-redux');
 
 var _creators = require('./creators');
 
+// import shallowCompare from 'shallow-compare'
+// import { createSelector } from 'reselect'
 function pick(object, keys) {
   var result = {};
   keys.forEach(function (key) {
@@ -32,19 +34,20 @@ function withKV() {
   if (!keys || !keys.length) {
     throw new TypeError('[redux-kv] options.keys is not an array in withKV method');
   }
-  var selector = (0, _creators.createSelector)(options);
+  var selectKV = (0, _creators.createKVSelector)(options);
+  // const cacheSelectValues = createSelector(
+  //   (state) => selectKV(state),
+  //   (kvState) => pick(kvState, keys)
+  // )
   var actionCreators = (0, _creators.createActionCreators)(options);
   var mapStateToProps = function mapStateToProps(state) {
-    var kvData = pick(selector(state), keys);
-    return { kvData: kvData, keys: keys };
+    return pick(selectKV(state), keys);
   };
   var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return { dispatch: dispatch };
   };
-  function mergeProps(_ref, _ref2, ownProps) {
-    var kvData = _ref.kvData,
-        keys = _ref.keys;
-    var dispatch = _ref2.dispatch;
+  function mergeProps(kvData, _ref, ownProps) {
+    var dispatch = _ref.dispatch;
 
     var kv = { values: kvData };
     keys.forEach(function (key) {

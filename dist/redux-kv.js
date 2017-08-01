@@ -33,7 +33,7 @@ function createKV() {
       prefix = _options.prefix;
 
   return _extends({
-    selector: (0, _creators.createSelector)({ getState: getState }),
+    selector: (0, _creators.createKVSelector)({ getState: getState }),
     reducer: (0, _creators.createReducer)({ prefix: prefix, initialValues: initialValues }),
     withKV: function withKV() {
       var moreOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
